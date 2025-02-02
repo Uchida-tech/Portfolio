@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby "3.3.7"
 
@@ -18,4 +18,13 @@ gem "rails", "7.2.2.1"
 # タイムゾーン情報を提供する（標準gem）
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
-
+group :development, :test do
+  # pry コンソールを使えるようにする。
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
+  gem "rspec-rails"
+  gem "rubocop-faker"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
+end
