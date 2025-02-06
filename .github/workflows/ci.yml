@@ -21,6 +21,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: myapp_test
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
@@ -31,6 +32,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.7
+          bundler: 2.6.3
           bundler-cache: true
 
       - name: Cache node modules
@@ -42,9 +44,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Wait for MySQL
+        run: sleep 10
 
       - name: Database create and migrate
         run: |
