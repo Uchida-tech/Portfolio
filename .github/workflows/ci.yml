@@ -61,6 +61,7 @@ jobs:
     defaults:
       run:
         working-directory: rails
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,18 +69,18 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.7
-          bundler-cache: true
+          ruby-version: 3.3
+          bundler-cache: true  # Bundlerのキャッシュを有効化
 
-      - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
-      
-      # - run: bundle exec which rubocop
-        
-      - name: Run rubocop
+      - name: Install dependencies
+        run: bundle install  # シンプルに実行
+
+      - name: Verify RuboCop installation
+        run: bundle exec rubocop -v  # RuboCopのバージョン確認
+
+      - name: Run RuboCop
         run: bundle exec rubocop
+
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
