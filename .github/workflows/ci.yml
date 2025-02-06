@@ -70,13 +70,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
+          bundler: 2.6.3
           bundler-cache: true  # Bundlerのキャッシュを有効化
 
       - name: Install dependencies
-        run: bundle install  # シンプルに実行
+        run: bundle install --jobs 4 --retry 3
 
       - name: Verify RuboCop installation
-        run: bundle exec rubocop -v  # RuboCopのバージョン確認
+        run: bundle exec rubocop -v
 
       - name: Run RuboCop
         run: bundle exec rubocop

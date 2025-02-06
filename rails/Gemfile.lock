@@ -260,7 +260,6 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.4)
   rspec-rails
-  rubocop
   rubocop-faker
   rubocop-rails
   rubocop-rspec
