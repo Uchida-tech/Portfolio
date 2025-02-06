@@ -78,19 +78,26 @@ jobs:
         run: |
           echo "=== PATH Contents ==="
           echo "$PATH" | tr ':' '\n' | sort | uniq
-          echo ""
           
+          echo ""
           echo "=== Bundle Configuration ==="
           bundle config list
           
+          echo ""
           echo "=== Rubocop Installation Info ==="
           bundle info rubocop || {
             echo "Warning: rubocop not found in bundle"
             echo "Available gems:"
             bundle list | grep rubocop
           }
-            - name: Run rubocop
-              run: bundle exec rubocop
+      - name: Run rubocop
+        env:
+          PATH: "$PATH:/opt/hostedtoolcache/Ruby/3.3.7/x64/bin"
+        run: |
+          echo "=== Final PATH Check ==="
+          echo "$PATH" | tr ':' '\n'
+          bundle exec rubocop --version
+          bundle exec rubocop
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
