@@ -74,9 +74,9 @@ jobs:
       - name: Bundler and gem install
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+          bundle install --jobs 4 --retry 3 
       
-      - run: bundle exec which rubocop
+      # - run: bundle exec which rubocop
         
       - name: Run rubocop
         run: bundle exec rubocop
