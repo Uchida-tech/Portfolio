@@ -64,40 +64,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.7
           bundler-cache: true
+
       - name: Bundler and gem install
         run: |
           gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - name: Verify rubocop installation
-        run: |
-          echo "=== PATH Contents ==="
-          echo "$PATH" | tr ':' '\n' | sort | uniq
-          
-          echo ""
-          echo "=== Bundle Configuration ==="
-          bundle config list
-          
-          echo ""
-          echo "=== Rubocop Installation Info ==="
-          bundle info rubocop || {
-            echo "Warning: rubocop not found in bundle"
-            echo "Available gems:"
-            bundle list | grep rubocop
-          }
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+      
+      # - run: bundle exec which rubocop
+        
       - name: Run rubocop
-        env:
-          PATH: "$PATH:/opt/hostedtoolcache/Ruby/3.3.7/x64/bin"
-        run: |
-          echo "=== Final PATH Check ==="
-          echo "$PATH" | tr ':' '\n'
-          bundle exec rubocop --version
-          bundle exec rubocop
+        run: bundle exec rubocop
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
