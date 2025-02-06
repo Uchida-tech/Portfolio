@@ -21,7 +21,12 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+          MYSQL_DATABASE: myapp_test
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1 -uroot"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
 
     steps:
       - name: Checkout code
@@ -31,6 +36,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.7
+          bundler: 2.6.3
           bundler-cache: true
 
       - name: Cache node modules
@@ -42,9 +48,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+        run: bundle install --jobs 4 --retry 3
 
       - name: Database create and migrate
         run: |
@@ -61,6 +65,7 @@ jobs:
     defaults:
       run:
         working-directory: rails
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,16 +73,19 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.7
-          bundler-cache: true
+          ruby-version: 3.3
+          bundler: 2.6.3
+          bundler-cache: true  # Bundlerのキャッシュを有効化
 
-      - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
 
-      - name: Run rubocop
+      - name: Verify RuboCop installation
+        run: bundle exec rubocop -v
+
+      - name: Run RuboCop
         run: bundle exec rubocop
+
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
