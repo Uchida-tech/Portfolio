@@ -76,10 +76,21 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: Verify rubocop installation
         run: |
-          echo $PATH | tr ':' '\n' | grep gems
-          bundle info rubocop
-      - name: Run rubocop
-        run: bundle exec rubocop
+          echo "=== PATH Contents ==="
+          echo "$PATH" | tr ':' '\n' | sort | uniq
+          echo ""
+          
+          echo "=== Bundle Configuration ==="
+          bundle config list
+          
+          echo "=== Rubocop Installation Info ==="
+          bundle info rubocop || {
+            echo "Warning: rubocop not found in bundle"
+            echo "Available gems:"
+            bundle list | grep rubocop
+          }
+            - name: Run rubocop
+              run: bundle exec rubocop
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
