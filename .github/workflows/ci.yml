@@ -22,7 +22,11 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: myapp_test
-        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1 -uroot"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
 
     steps:
       - name: Checkout code
@@ -33,7 +37,7 @@ jobs:
         with:
           ruby-version: 3.3.7
           bundler: 2.6.3
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -45,6 +49,9 @@ jobs:
 
       - name: Bundler and gem install
         run: bundle install --jobs 4 --retry 3
+
+      - name: Check MySQL connection
+        run: mysql -h 127.0.0.1 -uroot -e "SHOW DATABASES;"
 
       - name: Wait for MySQL
         run: sleep 10
