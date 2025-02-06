@@ -50,12 +50,6 @@ jobs:
       - name: Bundler and gem install
         run: bundle install --jobs 4 --retry 3
 
-      - name: Check MySQL connection
-        run: mysql -h 127.0.0.1 -uroot -e "SHOW DATABASES;"
-
-      - name: Wait for MySQL
-        run: sleep 10
-
       - name: Database create and migrate
         run: |
           cp config/database.yml.ci config/database.yml
