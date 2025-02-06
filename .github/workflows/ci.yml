@@ -74,7 +74,7 @@ jobs:
         with:
           ruby-version: 3.3
           bundler: 2.6.3
-          bundler-cache: false  # Bundlerのキャッシュを有効化
+          bundler-cache: true  # Bundlerのキャッシュを有効化
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
