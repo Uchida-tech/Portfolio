@@ -8,5 +8,6 @@ inherit_from:
   - config/rubocop/rspec.yml
 
 AllCops:
-  TargetRubyVersion: 3.3.7
+  NewCops: enable
+  TargetRubyVersion: 3.3
   SuggestExtensions: false
