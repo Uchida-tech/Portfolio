@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      active_recall:
+        title: タイトル
+        content: 本文

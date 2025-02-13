@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_06_152325) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_13_104656) do
+  create_table "active_recalls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", comment: "タイトル"
+    t.text "content", comment: "本文"
+    t.integer "status", comment: "ステータス（10:未保存, 20:勉強中, 30:公開中）"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_active_recalls_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -35,4 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_152325) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
+
+  add_foreign_key "active_recalls", "users"
 end
