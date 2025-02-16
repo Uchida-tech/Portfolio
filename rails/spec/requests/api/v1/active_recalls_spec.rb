@@ -6,7 +6,7 @@ RSpec.describe "Api::V1::ActiveRecalls", type: :request do
 
     before do
       create_list(:active_recall, 25, status: :published)
-      create_list(:active_recall, 8, status: :draft)
+      create_list(:active_recall, 8, status: :studying)
     end
 
     context "page を params で送信しない時" do
@@ -45,11 +45,11 @@ RSpec.describe "Api::V1::ActiveRecalls", type: :request do
   end
 
   describe "GET api/v1/active_recalls/:id" do
-    subject { get(api_v1_article_path(active_recall_id)) }
+    subject { get(api_v1_active_recall_path(active_recall_id)) }
 
     let(:active_recall) { create(:active_recall, status:) }
 
-    context "article_id に対応する active_recalls レコードが存在する時" do
+    context "active_recall_id に対応する active_recalls レコードが存在する時" do
       let(:active_recall_id) { active_recall.id }
 
       context "active_recalls レコードのステータスが公開中の時" do
@@ -64,8 +64,8 @@ RSpec.describe "Api::V1::ActiveRecalls", type: :request do
         end
       end
 
-      context "active_recalls レコードのステータスが下書きの時" do
-        let(:status) { :draft }
+      context "active_recalls レコードのステータスが勉強中の時" do
+        let(:status) { :studying }
 
         it "ActiveRecord::RecordNotFound エラーが返る" do
           expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
