@@ -118,6 +118,8 @@ GEM
       rails (>= 4.2.0, < 8.1)
     diff-lcs (1.5.1)
     drb (2.2.1)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.13.1)
     factory_bot (6.5.1)
       activesupport (>= 6.1.0)
@@ -361,6 +363,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise_token_auth
+  enum_help
   factory_bot_rails
   faker
   kaminari
