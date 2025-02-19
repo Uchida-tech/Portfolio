@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   db:
     image: mysql:8.4.2
@@ -25,12 +25,15 @@ services:
     stdin_open: true
   next:
       build:
-        dockerfile: ./next/Dockerfile
+        context: ./next
+        dockerfile: Dockerfile
       tty: true
       stdin_open: true
       volumes:
         - ./next:/app
       ports:
         - "8000:3000"
+      environment:
+      - NODE_ENV=development
 volumes:
   mysql_data:
