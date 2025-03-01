@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useUserState } from '@/hooks/useGlobalState'
 
 const Header = () => {
+  const [user] = useUserState()
   return (
     <header className="sticky top-0 bg-white shadow-md z-50">
       <div className="navbar sticky max-w-full px-4">
@@ -20,9 +22,16 @@ const Header = () => {
             <li>
               <Link href="/active_recalls/new">新規投稿</Link>
             </li>
-            <li>
-              <Link href="/login">ログイン</Link>
-            </li>
+            {user.isFetched && (
+              <>
+                {!user.isSignedIn && (
+                  <li>
+                    <Link href="/sign_in">Sign In</Link>
+                  </li>
+                )}
+                {user.isSignedIn && <li>{user.name}</li>}
+              </>
+            )}
           </ul>
         </div>
       </div>
