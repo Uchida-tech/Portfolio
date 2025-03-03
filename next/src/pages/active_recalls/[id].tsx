@@ -3,6 +3,8 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
 import { fetcher } from '@/utils'
 
 type ArticleProps = {
@@ -21,8 +23,8 @@ const ArticleDetail: NextPage = () => {
   const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/active_recalls/'
   const { data, error } = useSWR(id ? url + id : null, fetcher)
 
-  if (error) return <div>Failed to load article.</div>
-  if (!data) return <div>Loading...</div>
+  if (error) return <Error />
+  if (!data) return <Loading />
 
   const article: ArticleProps = camelcaseKeys(data, { deep: true })
 
