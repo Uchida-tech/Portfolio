@@ -16,12 +16,6 @@ const Header = () => {
             <li>
               <Link href="/">ホーム</Link>
             </li>
-            <li>
-              <Link href="/active_recalls">記事一覧</Link>
-            </li>
-            <li>
-              <Link href="/active_recalls/new">新規投稿</Link>
-            </li>
             {user.isFetched && (
               <>
                 {!user.isSignedIn && (
@@ -29,7 +23,19 @@ const Header = () => {
                     <Link href="/sign_in">Sign In</Link>
                   </li>
                 )}
-                {user.isSignedIn && <li>{user.name}</li>}
+                {user.isSignedIn && (
+                  <>
+                    <li>
+                      <Link href="/active_recalls/new">新規投稿</Link>
+                    </li>
+                    <li>
+                      <Link href="/active_recalls">記事一覧</Link>
+                    </li>
+                    <li>
+                      <Link href="/">{user.name}</Link>
+                    </li>
+                  </>
+                )}
               </>
             )}
           </ul>
