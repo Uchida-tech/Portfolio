@@ -34,7 +34,6 @@ const Index: NextPage = () => {
     meta?: MetaProps
   }>(url, fetcher)
   if (error) return <Error />
-
   if (!data) return <Loading />
 
   const activeRecalls = camelcaseKeys(data.active_recalls)
