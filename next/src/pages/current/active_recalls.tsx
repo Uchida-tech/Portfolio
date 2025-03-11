@@ -1,5 +1,6 @@
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import useSWR from 'swr'
 import Error from '@/components/Error'
 import Loading from '@/components/Loading'
@@ -32,14 +33,19 @@ const CurrentActiveRecall: NextPage = () => {
         ) : (
           <div className="grid grid-cols-1 gap-6">
             {articles.map((article) => (
-              <div key={article.id} className="card bg-base-100 shadow-xl p-4">
-                <div className="card-body">
-                  <h2 className="card-title text-lg font-bold">
-                    {article.title}
-                  </h2>
-                  <p className="text-gray-600">{article.status}</p>
+              <Link
+                key={article.id}
+                href={`/current/active_recalls/` + article.id}
+              >
+                <div className="card bg-base-100 shadow-xl p-4">
+                  <div className="card-body">
+                    <h2 className="card-title text-lg font-bold">
+                      {article.title}
+                    </h2>
+                    <p className="text-gray-600">{article.status}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
