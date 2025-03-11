@@ -4,27 +4,17 @@ import { useSnackbarState } from '@/hooks/useGlobalState'
 
 const SuccessSnackbar = () => {
   const router = useRouter()
-  const [snackbar, setSnackbar] = useSnackbarState()
+  const [snackbar] = useSnackbarState()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (snackbar.pathname == router.pathname) {
+    if (snackbar.pathname === router.pathname && snackbar.message) {
       setOpen(true)
+      setTimeout(() => setOpen(false), 3000)
     }
-    setTimeout(() => setOpen(false), 3000)
   }, [snackbar, router])
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setOpen(false)
-    setSnackbar({ message: null, severity: null, pathname: null })
-  }
-
+  // DaisyUI の `toast` 風の `alert` クラスを設定
   const getAlertClass = (severity: string | null) => {
     switch (severity) {
       case 'success':
@@ -35,20 +25,15 @@ const SuccessSnackbar = () => {
   }
 
   return (
-    <>
+    <div className="toast toast-end z-50">
       {snackbar.severity && open && (
         <div
-          className={`fixed bottom-5 right-5 z-50 ${getAlertClass(snackbar.severity)} shadow-lg`}
+          className={`${getAlertClass(snackbar.severity)} flex justify-between items-center shadow-lg p-4`}
         >
-          <div className="flex items-center justify-between w-full p-3">
-            <span>{snackbar.message}</span>
-            <button onClick={handleClose} className="btn btn-sm btn-ghost ml-4">
-              ✕
-            </button>
-          </div>
+          <span>{snackbar.message}</span>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

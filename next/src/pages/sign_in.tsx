@@ -2,7 +2,6 @@ import axios, { AxiosResponse, AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-//import { useNotification } from '@/components/NotificationContext'
 import { useUserState, useSnackbarState } from '@/hooks/useGlobalState'
 
 type SignInFormData = {
@@ -50,7 +49,6 @@ const SignIn: NextPage = () => {
           ...user,
           isFetched: false,
         })
-        //showNotification('✅ サインインに成功しました！')
         setSnackbar({
           message: 'サインインに成功しました',
           severity: 'success',
