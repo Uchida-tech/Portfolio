@@ -2,8 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import { useNotification } from '@/components/NotificationContext'
-import { useUserState } from '@/hooks/useGlobalState'
+import { useUserState, useSnackbarState } from '@/hooks/useGlobalState'
 
 type SignInFormData = {
   email: string
@@ -13,7 +12,7 @@ type SignInFormData = {
 const SignIn: NextPage = () => {
   const router = useRouter()
   const [user, setUser] = useUserState()
-  const { showNotification } = useNotification()
+  const [, setSnackbar] = useSnackbarState()
 
   const {
     handleSubmit,
@@ -50,14 +49,20 @@ const SignIn: NextPage = () => {
           ...user,
           isFetched: false,
         })
-        showNotification('✅ サインインに成功しました！')
+        setSnackbar({
+          message: 'サインインに成功しました',
+          severity: 'success',
+          pathname: '/',
+        })
         router.push('/')
       })
       .catch((e: AxiosError<{ error: string }>) => {
         console.log(e.message)
-        const errorMessage =
-          e.response?.data?.error?.[0] || 'サインインに失敗しました。'
-        showNotification(`❌ ${errorMessage}`)
+        setSnackbar({
+          message: '登録ユーザーが見つかりません',
+          severity: 'error',
+          pathname: '/sign_in',
+        })
       })
   }
 
