@@ -26,7 +26,9 @@ const Header = () => {
                 {user.isSignedIn && (
                   <>
                     <li>
-                      <Link href="/active_recalls/new">新規投稿</Link>
+                      <Link href={'/current/articles/edit/' + active_recall.id}>
+                        新規投稿
+                      </Link>
                     </li>
                     <li>
                       <Link href="/current/active_recalls">My記事一覧</Link>

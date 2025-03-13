@@ -41,6 +41,7 @@ const CurrentArticleDetail: NextPage = () => {
             {article.status} | {article.createdAt}
           </p>
           <p className="mt-4">{article.content}</p>
+          <Link href={'/current/articles/edit/' + active_recall.id}></Link>
           <Link href="/current/active_recalls" className="btn btn-primary">
             Back to My Article List
           </Link>
