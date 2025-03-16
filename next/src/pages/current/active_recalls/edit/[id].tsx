@@ -38,13 +38,18 @@ const ArticleEditPage: NextPage = () => {
   )
 
   const article: ArticleProps = useMemo(() => {
-    return data
-      ? {
-          title: data.title ?? '',
-          content: data.content ?? '',
-          status: data.status,
-        }
-      : { title: '', content: '', status: 'draft' }
+    if (!data) {
+      return {
+        title: '',
+        content: '',
+        status: false,
+      }
+    }
+    return {
+      title: data.title == null ? '' : data.title,
+      content: data.content == null ? '' : data.content,
+      status: data.status,
+    }
   }, [data])
 
   const { handleSubmit, control, reset } = useForm<ArticleFormData>({
@@ -77,30 +82,46 @@ const ArticleEditPage: NextPage = () => {
 
     setIsLoading(true)
 
-    try {
-      await axios.patch(`${url}${id}`, {
-        ...data,
-        status: statusChecked ? 'published' : 'studying',
-      })
-      setSnackbar({
-        message: '記事を保存しました',
-        severity: 'success',
-        pathname: router.asPath,
-      })
-    } catch (err: unknown) {
-      if (isAxiosError(err)) {
-        console.error(err.message)
-        setSnackbar({
-          message: '記事の保存に失敗しました',
-          severity: 'error',
-          pathname: router.asPath,
-        })
-      } else {
-        console.error('Unexpected error:', err)
-      }
-    } finally {
-      setIsLoading(false)
+    const patchUrl =
+      process.env.NEXT_PUBLIC_API_BASE_URL + '/current/active_recalls/' + id
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
     }
+
+    const status = statusChecked ? 'published' : 'studying'
+
+    const patchData = { ...data, status: status }
+
+    axios({
+      method: 'PATCH',
+      url: patchUrl,
+      data: patchData,
+      headers: headers,
+    })
+      .then(() => {
+        setSnackbar({
+          message: '記事を保存しました',
+          severity: 'success',
+          pathname: '/current/active_recalls/edit/[id]',
+        })
+      })
+      .catch((err) => {
+        if (isAxiosError(err)) {
+          console.log(err.message)
+          setSnackbar({
+            message: '記事の保存に失敗しました',
+            severity: 'error',
+            pathname: '/current/active_recalls/edit/[id]',
+          })
+        }
+      })
+      .finally(() => {
+        setIsLoading(false) // 成功・失敗のどちらでもローディングを解除
+      })
   }
 
   if (error) return <Error />
@@ -111,7 +132,7 @@ const ArticleEditPage: NextPage = () => {
       {/* ヘッダー */}
       <div className="navbar bg-base-200 shadow-md mb-4">
         <div className="flex-1">
-          <Link href="/current/articles" className="btn btn-ghost">
+          <Link href="/current/active_recalls" className="btn btn-ghost">
             ← 戻る
           </Link>
         </div>
