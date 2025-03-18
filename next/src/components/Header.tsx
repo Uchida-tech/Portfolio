@@ -44,11 +44,18 @@ const Header = () => {
             {user.isFetched && (
               <>
                 {!user.isSignedIn && (
-                  <li>
-                    <Link href="/sign_in" className="btn btn-ghost">
-                      Sign In
-                    </Link>
-                  </li>
+                  <>
+                    <li>
+                      <Link href="/sign_in" className="btn btn-ghost">
+                        Sign In
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/sign_up" className="btn btn-ghost">
+                        Sign Up
+                      </Link>
+                    </li>
+                  </>
                 )}
                 {user.isSignedIn && (
                   <>
