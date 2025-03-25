@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_13_104656) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_25_145106) do
   create_table "active_recalls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", comment: "タイトル"
     t.text "content", comment: "本文"
@@ -19,6 +19,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_104656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_active_recalls_on_user_id"
+  end
+
+  create_table "recalls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "content", comment: "本文"
+    t.bigint "active_recalls_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active_recalls_id"], name: "index_recalls_on_active_recalls_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -47,4 +55,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_104656) do
   end
 
   add_foreign_key "active_recalls", "users"
+  add_foreign_key "recalls", "active_recalls", column: "active_recalls_id"
 end
