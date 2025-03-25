@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resource :user, only: [:show]
         resources :active_recalls, only: [:index, :show, :create, :update] do
           resources :recalls, only: [:create]
+        end
       end
       resources :active_recalls, only: [:index, :show]
     end
