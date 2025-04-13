@@ -20,18 +20,18 @@ class Api::V1::Current::RecallsController < Api::V1::BaseController
 
   private
 
-  # 特定の投稿を取得するための処理
-  def set_active_recall
-    @active_recall = ActiveRecall.find(params[:active_recall_id])
-  end
-
-  def recall_params
-    params.require(:recall).permit(:content)
-  end
-
-  def ensure_post_owner
-    unless @active_recall.user == current_user
-      render json: { error: "投稿者のみコメント可能です" }, status: :forbidden
+    # 特定の投稿を取得するための処理
+    def set_active_recall
+      @active_recall = ActiveRecall.find(params[:active_recall_id])
     end
-  end
+
+    def recall_params
+      params.require(:recall).permit(:content)
+    end
+
+    def ensure_post_owner
+      unless @active_recall.user == current_user
+        render json: { error: "投稿者のみコメント可能です" }, status: :forbidden
+      end
+    end
 end
