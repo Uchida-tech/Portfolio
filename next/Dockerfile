@@ -1,2 +1,4 @@
-FROM node:22.13.1
+FROM node:23-slim
+
+# 作業ディレクトリ
 WORKDIR /app
