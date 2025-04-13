@@ -120,59 +120,61 @@ const CurrentArticleDetail: NextPage = () => {
   if (!data) return <Loading />
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="card w-full bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">{article.title}</h2>
-          <p className="text-gray-600">
-            {article.status} | {article.createdAt}
-          </p>
-          <p className="mt-4">{article.content}</p>
-          <Link
-            href={'/current/active_recalls/edit/' + article.id}
-            className="btn btn-ghost"
-          >
-            編集
-          </Link>
-          <Link href="/current/active_recalls" className="btn btn-primary">
-            Back to My Article List
-          </Link>
-        </div>
-      </div>
-      <div>
-        {/* コメント一覧 */}
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold">過去のrecall</h3>
-          <div className="card w-full bg-base-100 shadow-xl">
-            <ul>
-              {comments.map((c) => (
-                <li key={c.id} className="border-b py-2">
-                  <p>{c.content}</p>
-                  <p className="text-sm text-gray-500">{c.createdAt}</p>
-                </li>
-              ))}
-            </ul>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="container mx-auto p-4">
+        <div className="card w-full bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title text-2xl font-bold">{article.title}</h2>
+            <p className="text-gray-600">
+              {article.status} | {article.createdAt}
+            </p>
+            <p className="mt-4">{article.content}</p>
+            <Link
+              href={'/current/active_recalls/edit/' + article.id}
+              className="btn btn-ghost"
+            >
+              編集
+            </Link>
+            <Link href="/current/active_recalls" className="btn btn-primary">
+              Back to My Article List
+            </Link>
           </div>
         </div>
-        <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <Controller
-              name="content"
-              control={control}
-              render={({ field }) => (
-                <textarea
-                  {...field}
-                  className="textarea textarea-bordered w-full h-60"
-                />
-              )}
-            />
-            <button
-              type="submit"
-              className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
-            >
-              recall
-            </button>
-          </form>
+        <div>
+          {/* コメント一覧 */}
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold">過去のrecall</h3>
+            <div className="card w-full bg-base-100 shadow-xl">
+              <ul>
+                {comments.map((c) => (
+                  <li key={c.id} className="border-b py-2">
+                    <p>{c.content}</p>
+                    <p className="text-sm text-gray-500">{c.createdAt}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <Controller
+                name="content"
+                control={control}
+                render={({ field }) => (
+                  <textarea
+                    {...field}
+                    className="textarea textarea-bordered w-full h-60"
+                  />
+                )}
+              />
+              <button
+                type="submit"
+                className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
+              >
+                recall
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

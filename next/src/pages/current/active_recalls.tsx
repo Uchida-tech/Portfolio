@@ -12,6 +12,7 @@ type ArticleProps = {
   id: number
   title: string
   status: string
+  createdAt: string
 }
 
 const CurrentActiveRecall: NextPage = () => {
@@ -26,7 +27,7 @@ const CurrentActiveRecall: NextPage = () => {
   const articles: ArticleProps[] = camelcaseKeys(data, { deep: true })
 
   return (
-    <div className="bg-base-200 min-h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <div className="max-w-3xl mx-auto p-6">
         {articles.length === 0 ? (
           <p className="text-gray-600">投稿はありません</p>
@@ -42,13 +43,15 @@ const CurrentActiveRecall: NextPage = () => {
                     <h2 className="card-title text-lg font-bold">
                       {article.title}
                     </h2>
-                    <p className="text-gray-600">{article.status}</p>
-                    <Link
+                    <p className="text-gray-600">
+                      {article.status} | {article.createdAt}
+                    </p>
+                    {/* <Link
                       href={'/current/active_recalls/edit/' + article.id}
                       className="btn btn-ghost"
                     >
                       編集
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </Link>
