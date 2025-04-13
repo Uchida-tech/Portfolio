@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       end
       namespace :current do
         resource :user, only: [:show]
-        resources :active_recalls, only: [:index, :show, :create, :update]
+        resources :active_recalls, only: [:index, :show, :create, :update] do
+          resources :recalls, only: [:index, :create, :show]
+        end
       end
       resources :active_recalls, only: [:index, :show]
     end
