@@ -29,17 +29,19 @@ const ArticleDetail: NextPage = () => {
   const article: ArticleProps = camelcaseKeys(data, { deep: true })
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="card w-full bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">{article.title}</h2>
-          <p className="text-gray-600">
-            By {article.user.name} | {article.createdAt}
-          </p>
-          <p className="mt-4">{article.content}</p>
-          <Link href="/" className="btn btn-primary">
-            Back to Home
-          </Link>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="container mx-auto p-4">
+        <Link href="/" className="btn btn-ghost">
+          Back
+        </Link>
+        <div className="card w-full bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title text-2xl font-bold">{article.title}</h2>
+            <p className="text-gray-600">
+              By {article.user.name} | {article.createdAt}
+            </p>
+            <p className="mt-4">{article.content}</p>
+          </div>
         </div>
       </div>
     </div>

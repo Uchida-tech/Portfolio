@@ -44,7 +44,7 @@ const Index: NextPage = () => {
   }
 
   return (
-    <div className="bg-base-200 min-h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <div className="max-w-3xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {activeRecalls.map((activeRecall) => (

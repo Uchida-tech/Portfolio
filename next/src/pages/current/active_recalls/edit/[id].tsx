@@ -1,6 +1,5 @@
 import axios, { isAxiosError } from 'axios'
 import type { NextPage } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
@@ -108,6 +107,7 @@ const ArticleEditPage: NextPage = () => {
           severity: 'success',
           pathname: '/current/active_recalls/edit/[id]',
         })
+        router.push('/current/active_recalls')
       })
       .catch((err) => {
         if (isAxiosError(err)) {
@@ -129,32 +129,6 @@ const ArticleEditPage: NextPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      {/* ヘッダー */}
-      <div className="navbar bg-base-200 shadow-md mb-4">
-        <div className="flex-1">
-          <Link href="/current/active_recalls" className="btn btn-ghost">
-            ← 戻る
-          </Link>
-        </div>
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              className="toggle"
-              checked={statusChecked}
-              onChange={() => setStatusChecked(!statusChecked)}
-            />
-            <span className="text-sm">公開/下書き</span>
-          </label>
-          <button
-            className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
-            onClick={handleSubmit(onSubmit)}
-          >
-            更新する
-          </button>
-        </div>
-      </div>
-
       {/* 記事編集エリア */}
       <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -181,12 +155,23 @@ const ArticleEditPage: NextPage = () => {
               />
             )}
           />
-          <button
-            type="submit"
-            className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
-          >
-            保存する
-          </button>
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                className="toggle"
+                checked={statusChecked}
+                onChange={() => setStatusChecked(!statusChecked)}
+              />
+              <span className="text-sm">下書き/公開</span>
+            </label>
+            <button
+              className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+              onClick={handleSubmit(onSubmit)}
+            >
+              保存する
+            </button>
+          </div>
         </form>
       </div>
     </div>
