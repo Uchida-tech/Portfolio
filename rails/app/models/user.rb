@@ -7,5 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
   has_many :active_recalls, dependent: :destroy
-  has_many :recalls
+  has_many :recalls, dependent: :destroy
 end
