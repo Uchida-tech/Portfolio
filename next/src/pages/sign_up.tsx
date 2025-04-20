@@ -82,7 +82,7 @@ const SignUp: NextPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="card w-full max-w-sm bg-white shadow-xl p-6">
-        <h2 className="text-2xl font-bold text-center mb-4">Sign in</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">Sign up</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="form-control">
             <label className="label">

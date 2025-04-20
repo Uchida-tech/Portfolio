@@ -122,6 +122,17 @@ const CurrentArticleDetail: NextPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto p-4">
+        <div className="flex items-center justify-between">
+          <Link href="/current/active_recalls" className="btn btn-ghost ">
+            Back
+          </Link>
+          <Link
+            href={'/current/active_recalls/edit/' + article.id}
+            className="btn btn-ghost"
+          >
+            編集
+          </Link>
+        </div>
         <div className="card w-full bg-base-100 shadow-xl">
           <div className="card-body">
             <h2 className="card-title text-2xl font-bold">{article.title}</h2>
@@ -129,15 +140,6 @@ const CurrentArticleDetail: NextPage = () => {
               {article.status} | {article.createdAt}
             </p>
             <p className="mt-4">{article.content}</p>
-            <Link
-              href={'/current/active_recalls/edit/' + article.id}
-              className="btn btn-ghost"
-            >
-              編集
-            </Link>
-            <Link href="/current/active_recalls" className="btn btn-primary">
-              Back to My Article List
-            </Link>
           </div>
         </div>
         <div>
