@@ -1,5 +1,6 @@
 import axios, { isAxiosError } from 'axios'
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
@@ -67,7 +68,7 @@ const ArticleEditPage: NextPage = () => {
       return setSnackbar({
         message: '記事の保存にはタイトルが必要です',
         severity: 'error',
-        pathname: router.asPath,
+        pathname: router.pathname, //現在のパスの取得(idは取得しない)
       })
     }
 
@@ -75,7 +76,7 @@ const ArticleEditPage: NextPage = () => {
       return setSnackbar({
         message: '本文なしの記事は公開できません',
         severity: 'error',
-        pathname: router.asPath,
+        pathname: router.pathname,
       })
     }
 
@@ -105,7 +106,7 @@ const ArticleEditPage: NextPage = () => {
         setSnackbar({
           message: '記事を保存しました',
           severity: 'success',
-          pathname: '/current/active_recalls/edit/[id]',
+          pathname: router.pathname,
         })
         router.push('/current/active_recalls')
       })
@@ -115,7 +116,7 @@ const ArticleEditPage: NextPage = () => {
           setSnackbar({
             message: '記事の保存に失敗しました',
             severity: 'error',
-            pathname: '/current/active_recalls/edit/[id]',
+            pathname: router.pathname,
           })
         }
       })
@@ -128,7 +129,10 @@ const ArticleEditPage: NextPage = () => {
   if (!data) return <Loading />
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 p-4 mx-auto">
+      <Link href="/current/active_recalls" className="btn btn-ghost ">
+        Back
+      </Link>
       {/* 記事編集エリア */}
       <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -155,7 +159,7 @@ const ArticleEditPage: NextPage = () => {
               />
             )}
           />
-          <div className="flex gap-4">
+          <div className="flex items-center justify-between">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
