@@ -123,7 +123,7 @@ const CurrentArticleDetail: NextPage = () => {
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between">
-          <Link href="/current/active_recalls" className="btn btn-ghost ">
+          <Link href="/" className="btn btn-ghost ">
             Back
           </Link>
           <Link
@@ -157,7 +157,7 @@ const CurrentArticleDetail: NextPage = () => {
               </ul>
             </div>
           </div>
-          <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+          <div className="card mx-auto w-full bg-white p-6 rounded-lg shadow-lg">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <Controller
                 name="content"

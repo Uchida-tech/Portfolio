@@ -1,6 +1,5 @@
 import axios, { isAxiosError } from 'axios'
 import type { NextPage } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
@@ -130,53 +129,55 @@ const ArticleEditPage: NextPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 mx-auto">
-      <Link href="/current/active_recalls" className="btn btn-ghost ">
-        Back
-      </Link>
-      {/* 記事編集エリア */}
-      <div className="container mx-auto max-w-3xl bg-white p-6 rounded-lg shadow-lg">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <Controller
-            name="title"
-            control={control}
-            render={({ field }) => (
-              <input
-                {...field}
-                type="text"
-                placeholder="タイトル"
-                className="input input-bordered w-full text-lg"
-              />
-            )}
-          />
-          <Controller
-            name="content"
-            control={control}
-            render={({ field }) => (
-              <textarea
-                {...field}
-                placeholder="本文を入力"
-                className="textarea textarea-bordered w-full h-60"
-              />
-            )}
-          />
-          <div className="flex items-center justify-between">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                className="toggle"
-                checked={statusChecked}
-                onChange={() => setStatusChecked(!statusChecked)}
-              />
-              <span className="text-sm">下書き/公開</span>
-            </label>
-            <button
-              className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
-              onClick={handleSubmit(onSubmit)}
-            >
-              保存する
-            </button>
-          </div>
-        </form>
+      <div className="container mx-auto p-4">
+        <button className="btn btn-ghost" onClick={() => router.back()}>
+          Back
+        </button>
+        <div className="card mx-auto w-full bg-white p-6 rounded-lg shadow-lg">
+          {/* 記事編集エリア */}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  placeholder="タイトル"
+                  className="input input-bordered w-full text-lg"
+                />
+              )}
+            />
+            <Controller
+              name="content"
+              control={control}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  placeholder="本文を入力"
+                  className="textarea textarea-bordered w-full h-60"
+                />
+              )}
+            />
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  checked={statusChecked}
+                  onChange={() => setStatusChecked(!statusChecked)}
+                />
+                <span className="text-sm">下書き/公開</span>
+              </label>
+              <button
+                className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                onClick={handleSubmit(onSubmit)}
+              >
+                保存する
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
