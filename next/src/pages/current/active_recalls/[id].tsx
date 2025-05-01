@@ -123,9 +123,9 @@ const CurrentArticleDetail: NextPage = () => {
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="btn btn-ghost ">
+          <button className="btn btn-ghost" onClick={() => router.back()}>
             Back
-          </Link>
+          </button>
           <Link
             href={'/current/active_recalls/edit/' + article.id}
             className="btn btn-ghost"
