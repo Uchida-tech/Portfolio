@@ -31,7 +31,7 @@ const Header = () => {
       <div className="navbar sticky max-w-full px-4">
         <div className="flex-1">
           <Link href="/" className="text-xl font-bold">
-            My App
+            Active Recall
           </Link>
         </div>
         <div className="flex-none">
