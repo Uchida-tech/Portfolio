@@ -46,12 +46,6 @@ const CurrentActiveRecall: NextPage = () => {
                     <p className="text-gray-600">
                       {article.status} | {article.createdAt}
                     </p>
-                    {/* <Link
-                      href={'/current/active_recalls/edit/' + article.id}
-                      className="btn btn-ghost"
-                    >
-                      編集
-                    </Link> */}
                   </div>
                 </div>
               </Link>
