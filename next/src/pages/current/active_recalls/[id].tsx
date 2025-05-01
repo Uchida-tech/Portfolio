@@ -29,6 +29,7 @@ type CommentProps = {
 
 type CommentFormData = {
   content: string
+  createdAt: string
 }
 
 const CurrentArticleDetail: NextPage = () => {
@@ -52,8 +53,9 @@ const CurrentArticleDetail: NextPage = () => {
   //コメントデータの取得
   const { data: commentData } = useSWR(commentUrl, fetcher)
 
+  // Jsonのキー文字列のスネークケースをキャメルケースに変換する
   const article: CurrentArticleProps = camelcaseKeys(data, { deep: true })
-  const comments: CommentProps[] = commentData || []
+  const comments: CommentProps[] = camelcaseKeys(commentData, { deep: true })
 
   //Hooksは条件の後に記述してはいけない
   const { handleSubmit, control, reset } = useForm<CommentFormData>({
@@ -142,23 +144,12 @@ const CurrentArticleDetail: NextPage = () => {
             <p className="mt-4">{article.content}</p>
           </div>
         </div>
-        <div>
-          {/* コメント一覧 */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold">過去のrecall</h3>
-            <div className="card w-full bg-base-100 shadow-xl">
-              <ul>
-                {comments.map((c) => (
-                  <li key={c.id} className="border-b py-2">
-                    <p>{c.content}</p>
-                    <p className="text-sm text-gray-500">{c.createdAt}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        <div className="mt-6">
           <div className="card mx-auto w-full bg-white p-6 rounded-lg shadow-lg">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col justify-between h-full space-y-4"
+            >
               <Controller
                 name="content"
                 control={control}
@@ -171,11 +162,30 @@ const CurrentArticleDetail: NextPage = () => {
               />
               <button
                 type="submit"
-                className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
+                className={`btn btn-primary self-end ${isLoading ? 'loading' : ''}`}
               >
                 recall
               </button>
             </form>
+          </div>
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold">過去のrecall</h3>
+            <div className="grid grid-cols-1 gap-6">
+              {comments.map((c) => (
+                <div key={c.id} className="py-1">
+                  <div className="card w-full bg-base-100 shadow-xl">
+                    <div className="card-body">
+                      <h2 className="card-title text-lg font-bold">
+                        {c.content}
+                      </h2>
+                      <p className="text-gray-600">
+                        {new Date(c.createdAt).toLocaleString('ja-JP')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
