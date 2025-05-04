@@ -72,11 +72,24 @@ const Header = () => {
                         My記事一覧
                       </Link>
                     </li>
-                    <li>
-                      <Link href="/" className="btn btn-ghost">
+                    <div className="dropdown dropdown-end">
+                      <label tabIndex={0} className="btn btn-ghost">
                         {user.name}
-                      </Link>
-                    </li>
+                      </label>
+                      <ul
+                        tabIndex={0}
+                        className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                      >
+                        <li>
+                          <Link
+                            href="/sign_out"
+                            className="btn btn-ghost justify-start"
+                          >
+                            SignOut
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </>
                 )}
               </>
