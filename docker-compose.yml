@@ -1,16 +1,18 @@
 # version: '3.9'
+version: '3.9'
+
 services:
   db:
-    image: mysql:8.4.2
+    image: postgres:16
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: myapp_development
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp_development
     ports:
-      - "3305:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
+
   rails:
     build:
       context: ./rails
@@ -18,11 +20,17 @@ services:
     volumes:
       - ./rails:/myapp
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
       - db
     tty: true
     stdin_open: true
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: myapp_development
+
   next:
     build:
       context: ./next
@@ -31,7 +39,6 @@ services:
     stdin_open: true
     volumes:
       - ./next:/app
-      # node_modulesのvolume設定
       - /app/node_modules
     ports:
       - "8000:3000"
@@ -39,5 +46,6 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - NODE_ENV=development
+
 volumes:
-  mysql_data:
+  postgres_data:
