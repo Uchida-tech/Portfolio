@@ -11,7 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_03_25_145106) do
-  create_table "active_recalls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_recalls", force: :cascade do |t|
     t.string "title", comment: "タイトル"
     t.text "content", comment: "本文"
     t.integer "status", comment: "ステータス（10:未保存, 20:勉強中, 30:公開中）"
@@ -21,7 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_25_145106) do
     t.index ["user_id"], name: "index_active_recalls_on_user_id"
   end
 
-  create_table "recalls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "recalls", force: :cascade do |t|
     t.text "content", comment: "本文"
     t.bigint "user_id", null: false
     t.bigint "active_recall_id", null: false
@@ -31,7 +34,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_25_145106) do
     t.index ["user_id"], name: "index_recalls_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
