@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      active_recall:
+        title: タイトル
+        content: 本文
+  enums:
+    active_recall:
+      status:
+        unsaved: 未保存
+        draft: 勉強中
+        published: 公開中
