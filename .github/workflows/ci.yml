@@ -14,19 +14,25 @@ jobs:
     defaults:
       run:
         working-directory: rails
+
     services:
-      mysql:
-        image: mysql:8.0.32
+      postgres:
+        image: postgres:15
         ports:
-          - 3306:3306
+          - 5432:5432
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: myapp_test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password
         options: >-
-          --health-cmd "mysqladmin ping -h 127.0.0.1 -uroot"
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@127.0.0.1:5432/myapp_test
 
     steps:
       - name: Checkout code
@@ -39,25 +45,18 @@ jobs:
           bundler: 2.6.3
           bundler-cache: true
 
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Bundler and gem install
+      - name: Bundler install
         run: bundle install --jobs 4 --retry 3
 
-      - name: Database create and migrate
+      - name: Prepare database
         run: |
           cp config/database.yml.ci config/database.yml
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:create
+          bundle exec rails db:migrate
 
-      - name: Run rspec
+      - name: Run RSpec
         run: bundle exec rspec
+
 
   # 処理② rubocop のルール違反がないことをチェック
   rubocop:
