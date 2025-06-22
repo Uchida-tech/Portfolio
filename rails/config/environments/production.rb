@@ -12,6 +12,6 @@ config.action_mailer.smtp_settings = {
 }
 
 config.action_mailer.default_url_options = {
-  host: "your-app-name.onrender.com",
+  host: "https://myportfolio-tdl6.onrender.com",
   protocol: "https",
 }
