@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
-rm -f /myapp/tmp/pids/server.pid
+# 初回起動時のDB準備（Renderは自動でDBを作らない）
+bundle exec rails db:migrate
 
 exec "$@"
