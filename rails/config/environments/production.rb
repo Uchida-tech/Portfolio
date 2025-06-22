@@ -1,6 +1,7 @@
 Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.eager_load = true
+  config.hosts << "myportfolio-tdl6.onrender.com"
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -14,7 +15,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = {
-    host: "https://myportfolio-tdl6.onrender.com",
+    host: "myportfolio-tdl6.onrender.com",
     protocol: "https",
   }
 end
