@@ -1,7 +1,6 @@
 Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.eager_load = true
-  # config.hosts.clear
   config.hosts << "myportfolio-tdl6.onrender.com"
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
