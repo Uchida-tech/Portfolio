@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: myapp_production
+      POSTGRES_DB: myapp_development
     ports:
       - "5432:5432"
     volumes:
@@ -16,7 +16,7 @@ services:
   rails:
     build:
       context: ./rails
-    command: bundle exec rails server -e production -b 0.0.0.0 -p ${PORT:-3000}
+    command: bash -c "tail -f log/development.log"
     volumes:
       - ./rails:/myapp
     ports:
@@ -26,10 +26,10 @@ services:
     tty: true
     stdin_open: true
     environment:
-      RAILS_ENV: production
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
-      DATABASE_URL: postgresql://myportfolio_db_5zxi_user:USsfa3NtL2oIy3Tu8sXtwaHFG5PwDeOD@dpg-d1brtgodl3ps73evun80-a.singapore-postgres.render.com/myportfolio_db_5zxi
-      CORS_ORIGINS: https://my-portfolio-five-lovat-o9u46t7cag.vercel.app
+      DATABASE_HOST: db
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: myapp_development
 
   next:
     build:
@@ -43,8 +43,9 @@ services:
     ports:
       - "8000:3000"
     environment:
-      - NODE_ENV=production
-      - BACKEND_API_URL=https://myportfolio-tdl6.onrender.com
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - NODE_ENV=development
 
 volumes:
   postgres_data:
