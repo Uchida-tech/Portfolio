@@ -1,6 +1,9 @@
 ﻿# Portfolio 学習アプリ「ActiveRecall」
 
 
+## アプリURL（2025/06/29 デプロイに成功しました！）
+https://my-portfolio-five-lovat-o9u46t7cag.vercel.app/
+
 ## 概要
 
 このアプリは「アクティブリコール（Active Recall）」という学習法を取り入れた、記憶定着を目的とした学習用Webアプリです。
@@ -98,8 +101,6 @@
 - Git・GitHubを用いた開発管理
 - 技術習得への意欲と継続力
 
-
-
 ## スクリーンショット
 <table>
   <tr>
@@ -168,7 +169,6 @@
 </table>
 
 ## 今後の実装予定
-- Vercel、Renderを用いたデプロイ
 - Googleログイン機能
 - ユーザーフォロー機能
 - いいね機能
