@@ -159,8 +159,8 @@ https://my-portfolio-five-lovat-o9u46t7cag.vercel.app/
 
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/0ba3a362-8ddd-4734-b2c2-c6b3e5796856" width="500"/></td>
-    <td><img src="https://github.com/user-attachments/assets/43958c3f-f895-4c5d-85a9-ac93026b287b" width="500"/></td>
+    <td><img src="https://github.com/user-attachments/assets/99a3ae39-0dde-4d88-b779-43862497f5d1" width="500"/></td>
+    <td><img src="https://github.com/user-attachments/assets/66daff39-d805-475c-af37-f0e009ca3340" width="500"/></td>
   </tr>
   <tr>
     <td align="center">ActiveRecall画面</td>
