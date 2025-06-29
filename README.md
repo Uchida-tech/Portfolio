@@ -1,14 +1,41 @@
 ﻿# Portfolio
 
+
+## 概要
+
 このアプリは「アクティブリコール（Active Recall）」という学習法を取り入れた、記憶定着を目的とした学習用Webアプリです。
 
 ユーザーは「覚えたいこと」とその内容を投稿し、一定時間後に内容を思い出して再投稿することで記憶を強化できます。
 
----
+## ポートフォリオの作成にあたって
 
-## 🔧 使用技術
+以下のように学習を続けてきました。
+
+### プログラミング基礎学習（2024年9月～12月）
+- HTML基礎（Progate）
+- CSS基礎（Progate）
+- JavaScript基礎（Progate）
+- Ruby基礎（Progate）
+- Ruby on Rails基礎（Progate、Ruby on Railsチュートリアル）
+- Rspec基礎（Qiita）
+- Tailwind CSS基礎（Udemy）
+- web知識基礎（Qiita）
+- Git（Qiita）
+- React基礎（書籍：React実践の教科書）
+
+### AWS、Docker基礎学習（2025年1月）
+- AWS基礎（Udemy）
+- Docker基礎（Udemy）
+
+### ポートフォリオ作成（2025年2月～3月）
+
+
+
+## 使用技術
 
 ### フロントエンド
+- HTML/CSS
+- React
 - Next.js
 - TypeScript
 - Tailwind CSS + DaisyUI
@@ -32,35 +59,37 @@
 - Docker / Docker Compose
 - GitHub / GitHub Actions
 
----
+## 機能一覧
 
-## 📌 機能一覧
+- ユーザー登録機能
+- ログイン機能
+- 記事一覧表示機能（ページネーション付き）
+- 記事詳細表示機能
+- 新規記事投稿機能（記事を下書きで保存するか公開するかを選択できる）
+- My記事表示機能
+- My記事編集機能
+- ActiveRecall機能
+- フォームバリデーション機能（サインイン時にメールアドレス、パスワードの記入が不適切だとエラーメッセージを表示）
+- 通知バー表示機能（サインイン時、記事の作成時、ActiveRecall時に通知バーを表示）
 
-- ユーザー登録・ログイン
-- 記事一覧表示（ページネーション付き）
-- 記事詳細ページ
-- 記事投稿・編集機能
-- レスポンシブ対応
+## 工夫した点・技術的チャレンジ
 
----
+- **ActiveRecall機能：** 一画面でActiveRecallの実施とユーザーが記憶したいことの内容、過去のActiveRecallを確認できるようにした。
+- **UI/UX：** ユーザーが利用したいと思えるような見た目を意識した。勉強アプリなのでアプリ自体はシンプルになるように努めました。
+- **Issue駆動開発：** 機能ごとにIssueを作成し、スムーズな開発とコード管理を実現しました。
+- **Docker化：** チーム開発を意識してDockerでの環境構築方法を学習しました。
 
-## 🛠️ 工夫した点・技術的チャレンジ
 
-- **UI/UX：** ユーザーが利用したいと思えるような見た目を意識した。
-- **Issue駆動開発：** 機能ごとにIssueを作成し、スムーズな開発とコード管理を実現。
-- **Docker化：** チーム開発を意識してDockerでの環境構築方法を学習。
 
----
-
-## 📚 技術選定理由
+## 技術選定理由
 
 - **Ruby / Ruby on Rails：** 学習コストが低く、未経験者でもMVC設計やREST APIの理解がしやすいため選定。
 - **Next.js：** 静的生成やAPI連携に強く、フロントエンドの最新技術を学ぶために使用。
 - **DaisyUI：** Tailwind CSSと組み合わせることで、素早く一貫性のあるUIを構築可能なため採用。
 
----
 
-## 🎯 このポートフォリオの目的
+
+## このポートフォリオの目的
 
 未経験からWebエンジニアへの転職を目指しており、本アプリの作成を通じて以下の力を身につけました。
 
@@ -69,12 +98,12 @@
 - Git・GitHubを用いた開発管理
 - 技術習得への意欲と継続力
 
----
 
-## 📷 スクリーンショット
+
+## スクリーンショット
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/299c690c-19f9-4ec6-9778-072d5da4e9a6" width="500"/></td>
+    <td><img src="https://github.com/user-attachments/assets/a44313c4-fc8d-4e72-af89-03449c0d0688" width="500"/></td>
     <td><img src="https://github.com/user-attachments/assets/1751458f-7f8c-4d51-8541-6e03bb639456" width="500"/></td>
   </tr>
   <tr>
@@ -91,6 +120,28 @@
   <tr>
     <td align="center">サインアップ画面</td>
     <td align="center">letter_openwe_webを用いたメール送受信のテスト</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/d0c341b8-605f-44e0-b309-b6337312c683" width="500"/></td>
+    <td><img src="https://github.com/user-attachments/assets/366a27c2-f178-474a-92bb-d9e18402e522" width="500"/></td>
+  </tr>
+  <tr>
+    <td align="center">通知バーの実装</td>
+    <td align="center">バリデーション機能</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/e004ba09-829a-4a84-844a-f68a414c5285" width="500"/></td>
+    <td><img src="https://github.com/user-attachments/assets/26597b1d-bea8-422c-95a9-7797823e19bb" width="500"/></td>
+  </tr>
+  <tr>
+    <td align="center">ページネーション機能</td>
+    <td align="center">記事詳細画面</td>
   </tr>
 </table>
 
@@ -116,9 +167,7 @@
   </tr>
 </table>
 
----
-
-## 🚀 今後の実装予定
+## 今後の実装予定
 - Vercel、Renderを用いたデプロイ
 - Googleログイン機能
 - ユーザーフォロー機能
