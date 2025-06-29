@@ -1,4 +1,4 @@
-﻿# Portfolio
+﻿# Portfolio 学習アプリ「ActiveRecall」
 
 
 ## 概要
