@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # 疎通確認用のレスポンス
+  root to: proc { [200, {}, ["API is running"]] }
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   namespace :api do
     namespace :v1 do
