@@ -1,4 +1,4 @@
-#Renderへデプロイするように編集
+#Render用
 
 FROM ruby:3.3.7
 
